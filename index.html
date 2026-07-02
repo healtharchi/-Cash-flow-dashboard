@@ -16,7 +16,7 @@
 
     <script crossorigin src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
 
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.26.4/babel.min.js"></script>
 
     <style>
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -29,7 +29,7 @@
 <body class="bg-slate-100 text-slate-800 selection:bg-blue-100">
     <div id="root"></div>
 
-    <script type="text/babel">
+    <script type="text/plain" id="app-source">
         const { useState, useMemo } = React;
         const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip: RechartsTooltip, Legend, ResponsiveContainer, ReferenceLine, ComposedChart, Bar } = window.Recharts;
 
@@ -644,5 +644,12 @@
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<CashflowDashboard />);
     </script>
+<script>
+(function () {
+  var src = document.getElementById('app-source').textContent;
+  var code = Babel.transform(src, { presets: [['react', { runtime: 'classic' }]] }).code;
+  (0, eval)(code);
+})();
+</script>
 </body>
 </html>
